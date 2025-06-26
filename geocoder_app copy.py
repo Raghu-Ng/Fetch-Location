@@ -8,7 +8,7 @@ st.title("Address to Coordinates App 🌍")
 address = st.text_input("Enter an address")
 
 # API Key
-API_KEY = "a0326684eb334377a52fbb3cfefdde86"
+API_KEY = "API_KEY"
 
 # When user inputs address
 if address:
