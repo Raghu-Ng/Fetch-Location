@@ -3,11 +3,20 @@ import requests
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
+import os
 
 st.set_page_config(page_title="Geocoder", layout="centered")
 st.title("Address to Coordinates App 🌍")
 
-API_KEY = "a0326684eb334377a52fbb3cfefdde86"
+with st.sidebar:
+    st.subheader("🔑 API Key Setup")
+    api_key_input = st.text_input("Enter your OpenCage API Key", type="password", value=st.session_state.get("api_key", ""))
+    if api_key_input:
+        st.session_state["api_key"] = api_key_input
+    if not st.session_state.get("api_key"):
+        st.warning("Please enter your OpenCage API Key to use the app.")
+        st.stop()
+API_KEY = st.session_state["api_key"]
 
 # Caching the geocoding request
 @st.cache_data(ttl=3600)
